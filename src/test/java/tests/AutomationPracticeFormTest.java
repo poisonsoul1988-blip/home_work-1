@@ -141,4 +141,44 @@ public class AutomationPracticeFormTest extends TestBase{
         $(".text-center").shouldBe(visible);
         $("#firstName").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
     }
+
+    @Test
+    void emptyLastName() {
+
+        open("/automation-practice-form");
+        $("[id=firstName]").setValue("Leon");
+        $("[id=userEmail]").setValue("leon@testionni.com");
+        $("[id=gender-radio-1]").click();
+        $("[id=userNumber]").setValue("9999999999");
+        $("[id=dateOfBirthInput]").click();
+        $("[class=react-datepicker__month-select]").selectOption(7);
+        $(".react-datepicker__year-select").selectOption("1988");
+        $("div.react-datepicker__day.react-datepicker__day--006").click();
+        $("[id=uploadPicture]").uploadFromClasspath("my-image.png");
+        $("[id=currentAddress]").setValue("Bullet street 7");
+        $("[id=submit]").click();
+
+        $(".text-center").shouldBe(visible);
+        $("#lastName").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
+    }
+
+    @Test
+    void emptyPhoneNumber() {
+
+        open("/automation-practice-form");
+        $("[id=firstName]").setValue("Leon");
+        $("[id=lastName]").setValue("Testionni");
+        $("[id=userEmail]").setValue("leon@testionni.com");
+        $("[id=gender-radio-1]").click();
+        $("[id=dateOfBirthInput]").click();
+        $("[class=react-datepicker__month-select]").selectOption(7);
+        $(".react-datepicker__year-select").selectOption("1988");
+        $("div.react-datepicker__day.react-datepicker__day--006").click();
+        $("[id=uploadPicture]").uploadFromClasspath("my-image.png");
+        $("[id=currentAddress]").setValue("Bullet street 7");
+        $("[id=submit]").click();
+
+        $(".text-center").shouldBe(visible);
+        $("#userNumber").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
+    }
 }
