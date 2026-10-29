@@ -34,15 +34,15 @@ public class AutomationPracticeFormTest extends TestBase{
 
         $(".modal-open").shouldBe(visible);
         $(".modal-header").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("Leon Testionni"));
-        $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text("leon@testionni.com"));
+        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text(firstName + " " + lastName));
+        $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text(userEmail));
         $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Male"));
-        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text("9999999999"));
+        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text(userNumber));
         $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("06 August,1988"));
-        $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text("English"));
+        $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text(subjectsInput));
         $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text("Sports"));
         $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("my-image.png"));
-        $(".table-responsive").$(byText("Address")).parent().shouldHave(text("Bullet street 7"));
+        $(".table-responsive").$(byText("Address")).parent().shouldHave(text(currentAddress));
         $(".table-responsive").$(byText("State and City")).parent().shouldHave(text("NCR Delhi"));
         $("#closeLargeModal").shouldBe(visible);
     }
@@ -66,15 +66,15 @@ public class AutomationPracticeFormTest extends TestBase{
 
         $(".modal-open").shouldBe(visible);
         $(".modal-header").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("Leon Testionni"));
-        $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text("leon@testionni.com"));
+        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text(firstName + " " + lastName));
+        $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text(userEmail));
         $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Male"));
-        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text("9999999999"));
+        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text(userNumber));
         $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("06 August,1988"));
         $(".table-responsive").$(byText("Subjects")).sibling(0).shouldBe(empty);
         $(".table-responsive").$(byText("Hobbies")).sibling(0).shouldBe(empty);
         $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("my-image.png"));
-        $(".table-responsive").$(byText("Address")).parent().shouldHave(text("Bullet street 7"));
+        $(".table-responsive").$(byText("Address")).parent().shouldHave(text(currentAddress));
         $(".table-responsive").$(byText("State and City")).sibling(0).shouldBe(empty);
         $("#closeLargeModal").shouldBe(visible);
     }
