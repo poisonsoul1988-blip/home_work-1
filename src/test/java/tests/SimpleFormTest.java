@@ -27,8 +27,8 @@ public class SimpleFormTest {
         $("#userEmail").setValue(userEmail);
         $("#submit").click();
 
-        $("#name").shouldHave(text("Leon"));
-        $("#email").shouldHave(text("testionni@test.com"));
+        $("#name").shouldHave(text(userName));
+        $("#email").shouldHave(text(userEmail));
     }
 
     @Test
