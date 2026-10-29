@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static testdata.SimpleFormTestData.*;
 
 
 public class SimpleFormTest {
@@ -22,8 +23,8 @@ public class SimpleFormTest {
     @Test
     public void successfulSimpleFormTest() {
         open("https://qa-guru.github.io/one-page-form/text-box.html");
-        $("#userName").setValue("Leon");
-        $("#userEmail").setValue("testionni@test.com");
+        $("#userName").setValue(userName);
+        $("#userEmail").setValue(userEmail);
         $("#submit").click();
 
         $("#name").shouldHave(text("Leon"));
@@ -33,7 +34,7 @@ public class SimpleFormTest {
     @Test
     public void negativeSimpleFormTest() {
         open("https://qa-guru.github.io/one-page-form/text-box.html");
-        $("#userName").setValue("Leon");
+        $("#userName").setValue(userName);
         $("#userEmail").setValue("testionnitestcom");
         $("#submit").click();
 
