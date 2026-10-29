@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static testdata.AutomationPracticeFormTestData.*;
 
 public class AutomationPracticeFormTest extends TestBase{
 
@@ -12,24 +13,24 @@ public class AutomationPracticeFormTest extends TestBase{
     void successfulFill() {
 
         open("/automation-practice-form");
-        $("[id=firstName]").setValue("Leon");
-        $("[id=lastName]").setValue("Testionni");
-        $("[id=userEmail]").setValue("leon@testionni.com");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $("#userEmail").setValue(userEmail);
         $("#genterWrapper").$(byText("Male")).click();
-        $("[id=userNumber]").setValue("99999999999");
-        $("[id=dateOfBirthInput]").click();
-        $("[class=react-datepicker__month-select]").selectOption(7);
+        $("#userNumber").setValue(userNumber);
+        $("#dateOfBirthInput").click();
+        $(".react-datepicker__month-select").selectOption(7);
         $(".react-datepicker__year-select").selectOption("1988");
         $("div.react-datepicker__day.react-datepicker__day--006").click();
-        $("#subjectsInput").setValue("English").pressEnter();
+        $("#subjectsInput").setValue(subjectsInput).pressEnter();
         $("#hobbiesWrapper").$(byText("Sports")).click();
-        $("[id=uploadPicture]").uploadFromClasspath("my-image.png");
-        $("[id=currentAddress]").setValue("Bullet street 7");
+        $("#uploadPicture").uploadFromClasspath("my-image.png");
+        $("#currentAddress").setValue(currentAddress);
         $("#state").click();
         $("#react-select-3-listbox").$(byText("NCR")).click();
         $("#city").click();
         $("#react-select-4-listbox").$(byText("Delhi")).click();
-        $("[id=submit]").click();
+        $("#submit").click();
 
         $(".modal-open").shouldBe(visible);
         $(".modal-header").shouldHave(text("Thanks for submitting the form"));
@@ -50,18 +51,18 @@ public class AutomationPracticeFormTest extends TestBase{
     void requiredFieldsFill() {
 
         open("/automation-practice-form");
-        $("[id=firstName]").setValue("Leon");
-        $("[id=lastName]").setValue("Testionni");
-        $("[id=userEmail]").setValue("leon@testionni.com");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $("#userEmail").setValue(userEmail);
         $("#genterWrapper").$(byText("Male")).click();
-        $("[id=userNumber]").setValue("99999999999");
-        $("[id=dateOfBirthInput]").click();
-        $("[class=react-datepicker__month-select]").selectOption(7);
+        $("#userNumber").setValue(userNumber);
+        $("#dateOfBirthInput").click();
+        $(".react-datepicker__month-select").selectOption(7);
         $(".react-datepicker__year-select").selectOption("1988");
         $("div.react-datepicker__day.react-datepicker__day--006").click();
-        $("[id=uploadPicture]").uploadFromClasspath("my-image.png");
-        $("[id=currentAddress]").setValue("Bullet street 7");
-        $("[id=submit]").click();
+        $("#uploadPicture").uploadFromClasspath("my-image.png");
+        $("#currentAddress").setValue(currentAddress);
+        $("#submit").click();
 
         $(".modal-open").shouldBe(visible);
         $(".modal-header").shouldHave(text("Thanks for submitting the form"));
@@ -82,18 +83,18 @@ public class AutomationPracticeFormTest extends TestBase{
     void nonNumericPhoneNumber() {
 
         open("/automation-practice-form");
-        $("[id=firstName]").setValue("Leon");
-        $("[id=lastName]").setValue("Testionni");
-        $("[id=userEmail]").setValue("leon@testionni.com");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $("#userEmail").setValue(userEmail);
         $("#genterWrapper").$(byText("Male")).click();
-        $("[id=userNumber]").setValue("ffffffffffff");
-        $("[id=dateOfBirthInput]").click();
-        $("[class=react-datepicker__month-select]").selectOption(7);
+        $("#userNumber").setValue("ffffffffffff");
+        $("#dateOfBirthInput").click();
+        $(".react-datepicker__month-select").selectOption(7);
         $(".react-datepicker__year-select").selectOption("1988");
         $("div.react-datepicker__day.react-datepicker__day--006").click();
-        $("[id=uploadPicture]").uploadFromClasspath("my-image.png");
-        $("[id=currentAddress]").setValue("Bullet street 7");
-        $("[id=submit]").click();
+        $("#uploadPicture").uploadFromClasspath("my-image.png");
+        $("#currentAddress").setValue(currentAddress);
+        $("#submit").click();
 
         $(".text-center").shouldBe(visible);
         $("#userNumber").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
@@ -103,18 +104,18 @@ public class AutomationPracticeFormTest extends TestBase{
     void wrongEmail() {
 
         open("/automation-practice-form");
-        $("[id=firstName]").setValue("Leon");
-        $("[id=lastName]").setValue("Testionni");
-        $("[id=userEmail]").setValue("rewrerwr");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $("#userEmail").setValue("rewrerwr");
         $("#genterWrapper").$(byText("Male")).click();
-        $("[id=userNumber]").setValue("9999999999");
-        $("[id=dateOfBirthInput]").click();
-        $("[class=react-datepicker__month-select]").selectOption(7);
+        $("#userNumber").setValue(userNumber);
+        $("#dateOfBirthInput").click();
+        $(".react-datepicker__month-select").selectOption(7);
         $(".react-datepicker__year-select").selectOption("1988");
         $("div.react-datepicker__day.react-datepicker__day--006").click();
-        $("[id=uploadPicture]").uploadFromClasspath("my-image.png");
-        $("[id=currentAddress]").setValue("Bullet street 7");
-        $("[id=submit]").click();
+        $("#uploadPicture").uploadFromClasspath("my-image.png");
+        $("#currentAddress").setValue(currentAddress);
+        $("#submit").click();
 
         $(".text-center").shouldBe(visible);
         $("#userEmail").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
@@ -124,17 +125,17 @@ public class AutomationPracticeFormTest extends TestBase{
     void emptyName() {
 
         open("/automation-practice-form");
-        $("[id=lastName]").setValue("Testionni");
-        $("[id=userEmail]").setValue("leon@testionni.com");
+        $("#lastName").setValue(lastName);
+        $("#userEmail").setValue(userEmail);
         $("#genterWrapper").$(byText("Male")).click();
-        $("[id=userNumber]").setValue("9999999999");
-        $("[id=dateOfBirthInput]").click();
-        $("[class=react-datepicker__month-select]").selectOption(7);
+        $("#userNumber").setValue(userNumber);
+        $("#dateOfBirthInput").click();
+        $(".react-datepicker__month-select").selectOption(7);
         $(".react-datepicker__year-select").selectOption("1988");
         $("div.react-datepicker__day.react-datepicker__day--006").click();
-        $("[id=uploadPicture]").uploadFromClasspath("my-image.png");
-        $("[id=currentAddress]").setValue("Bullet street 7");
-        $("[id=submit]").click();
+        $("#uploadPicture").uploadFromClasspath("my-image.png");
+        $("#currentAddress").setValue(currentAddress);
+        $("#submit").click();
 
         $(".text-center").shouldBe(visible);
         $("#firstName").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
@@ -144,17 +145,17 @@ public class AutomationPracticeFormTest extends TestBase{
     void emptyLastName() {
 
         open("/automation-practice-form");
-        $("[id=firstName]").setValue("Leon");
-        $("[id=userEmail]").setValue("leon@testionni.com");
+        $("#firstName").setValue(firstName);
+        $("#userEmail").setValue(userEmail);
         $("#genterWrapper").$(byText("Male")).click();
-        $("[id=userNumber]").setValue("9999999999");
-        $("[id=dateOfBirthInput]").click();
-        $("[class=react-datepicker__month-select]").selectOption(7);
+        $("#userNumber").setValue(userNumber);
+        $("#dateOfBirthInput").click();
+        $(".react-datepicker__month-select").selectOption(7);
         $(".react-datepicker__year-select").selectOption("1988");
         $("div.react-datepicker__day.react-datepicker__day--006").click();
-        $("[id=uploadPicture]").uploadFromClasspath("my-image.png");
-        $("[id=currentAddress]").setValue("Bullet street 7");
-        $("[id=submit]").click();
+        $("#uploadPicture").uploadFromClasspath("my-image.png");
+        $("#currentAddress").setValue(currentAddress);
+        $("#submit").click();
 
         $(".text-center").shouldBe(visible);
         $("#lastName").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
@@ -164,17 +165,17 @@ public class AutomationPracticeFormTest extends TestBase{
     void emptyPhoneNumber() {
 
         open("/automation-practice-form");
-        $("[id=firstName]").setValue("Leon");
-        $("[id=lastName]").setValue("Testionni");
-        $("[id=userEmail]").setValue("leon@testionni.com");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $("#userEmail").setValue(userEmail);
         $("#genterWrapper").$(byText("Male")).click();
-        $("[id=dateOfBirthInput]").click();
-        $("[class=react-datepicker__month-select]").selectOption(7);
+        $("#dateOfBirthInput").click();
+        $(".react-datepicker__month-select").selectOption(7);
         $(".react-datepicker__year-select").selectOption("1988");
         $("div.react-datepicker__day.react-datepicker__day--006").click();
-        $("[id=uploadPicture]").uploadFromClasspath("my-image.png");
-        $("[id=currentAddress]").setValue("Bullet street 7");
-        $("[id=submit]").click();
+        $("#uploadPicture").uploadFromClasspath("my-image.png");
+        $("#currentAddress").setValue(currentAddress);
+        $("#submit").click();
 
         $(".text-center").shouldBe(visible);
         $("#userNumber").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
