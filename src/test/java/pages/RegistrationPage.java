@@ -3,6 +3,8 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 
+import java.util.Map;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
@@ -125,12 +127,19 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage checkTable(String key, String value){
+    public RegistrationPage checkTableRow(String key, String value){
         tableResults.$(byText(key)).parent().shouldHave(text(value));
+        return this;
+   }
+
+    public RegistrationPage checkFullTable(Map<String, String> expected) {
+        expected.forEach((label, value) ->
+                tableResults.$(byText(label)).parent().$$("td").get(1)
+                        .shouldHave(exactText(value)));
         return this;
     }
 
-    public RegistrationPage checkEmptyRecord(String key){
+    public RegistrationPage checkEmptyTableRow(String key){
         tableResults.$(byText(key)).sibling(0).shouldBe(empty);
         return this;
     }

@@ -1,5 +1,7 @@
 package testdata;
 
+import java.util.Map;
+
 public class RegistrationPageTestData {
     public static String firstName = "Leon";
     public static String lastName = "Testionni";
@@ -17,6 +19,20 @@ public class RegistrationPageTestData {
     public static String city = "Delhi";
     public static String successModalHeader = "Thanks for submitting the form";
 
+    public static Map<String, String> expectedTable() {
+        return Map.of(
+                "Student Name", firstName + " " + lastName,
+                "Student Email", userEmail,
+                "Gender", gender,
+                "Mobile", userNumber,
+                "Date of Birth", day + " " + month + "," + year,
+                "Subjects", subject,
+                "Hobbies", hobby,
+                "Picture", fileName,
+                "Address", currentAddress,
+                "State and City", state + " " + city
+        );
 
 
+    }
 }

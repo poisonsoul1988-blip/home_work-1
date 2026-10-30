@@ -3,6 +3,8 @@ package tests;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
+
 import static testdata.RegistrationPageTestData.*;
 
 @Nested
@@ -26,17 +28,7 @@ class RegistrationPageTest extends TestBase{
                 .setStateAndCity(state,city)
                 .submitForm()
                 .checkSuccessModal()
-                .checkSuccessHeader(successModalHeader)
-                .checkTable("Student Name",firstName + " " + lastName)
-                .checkTable("Student Email",userEmail)
-                .checkTable("Gender",gender)
-                .checkTable("Mobile",userNumber)
-                .checkTable("Date of Birth",day + " " + month + "," + year)
-                .checkTable("Subjects",subject)
-                .checkTable("Hobbies",hobby)
-                .checkTable("Picture","my-image.png")
-                .checkTable("Address",currentAddress)
-                .checkTable("State and City",state + " " + city)
+                .checkFullTable(expectedTable())
                 .checkCloseButton();
     }
 
@@ -56,16 +48,16 @@ class RegistrationPageTest extends TestBase{
                 .submitForm()
                 .checkSuccessModal()
                 .checkSuccessHeader(successModalHeader)
-                .checkTable("Student Name",firstName + " " + lastName)
-                .checkTable("Student Email",userEmail)
-                .checkTable("Gender",gender)
-                .checkTable("Mobile",userNumber)
-                .checkTable("Date of Birth",day + " " + month + "," + year)
-                .checkEmptyRecord("Subjects")
-                .checkEmptyRecord("Hobbies")
-                .checkTable("Picture","my-image.png")
-                .checkTable("Address",currentAddress)
-                .checkEmptyRecord("State and City")
+                .checkTableRow("Student Name",firstName + " " + lastName)
+                .checkTableRow("Student Email",userEmail)
+                .checkTableRow("Gender",gender)
+                .checkTableRow("Mobile",userNumber)
+                .checkTableRow("Date of Birth",day + " " + month + "," + year)
+                .checkEmptyTableRow("Subjects")
+                .checkEmptyTableRow("Hobbies")
+                .checkTableRow("Picture","my-image.png")
+                .checkTableRow("Address",currentAddress)
+                .checkEmptyTableRow("State and City")
                 .checkCloseButton();
     }
 
