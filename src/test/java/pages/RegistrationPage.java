@@ -115,7 +115,7 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage checkModal(){
+    public RegistrationPage checkSuccessModal(){
         successModal.shouldBe(visible);
         return this;
     }
