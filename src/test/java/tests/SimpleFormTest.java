@@ -1,44 +1,29 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 import static testdata.SimpleFormTestData.*;
 
 
-public class SimpleFormTest {
-
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.browserSize = "1920x1080";
-        Configuration.browser ="chrome";
-        Configuration.timeout = 10000;
-    }
+public class SimpleFormTest extends TestBaseSimpleForm {
 
     @Test
     public void successfulSimpleFormTest() {
-        open("https://qa-guru.github.io/one-page-form/text-box.html");
-        $("#userName").setValue(userName);
-        $("#userEmail").setValue(userEmail);
-        $("#submit").click();
-
-        $("#name").shouldHave(text(userName));
-        $("#email").shouldHave(text(userEmail));
+        simpleFormPage.openPage()
+                .typeUserName(userName)
+                .typeEmail(userEmail)
+                .submitForm()
+                .checkField("name",userName)
+                .checkField("email",userEmail);
     }
 
     @Test
     public void negativeSimpleFormTest() {
-        open("https://qa-guru.github.io/one-page-form/text-box.html");
-        $("#userName").setValue(userName);
-        $("#userEmail").setValue("testionnitestcom");
-        $("#submit").click();
-
-        $("#name").shouldNot(exist);
-        $("#email").shouldNot(exist);
+        simpleFormPage.openPage()
+                .typeUserName(userName)
+                .typeEmail("testionnitestcom")
+                .submitForm()
+                .checkFieldsAreAbsent("name")
+                .checkFieldsAreAbsent("email");
     }
 }
