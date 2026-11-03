@@ -6,19 +6,22 @@ import org.junit.jupiter.api.Test;
 import pages.TextBoxPage;
 
 import static testdata.TextBoxTestData.*;
-import static utils.RandomUtils.getRandomEmail;
-import static utils.RandomUtils.getRandomString;
+import static utils.RandomUtils.*;
 
 public class TextBoxTests extends TestBase{
     TextBoxPage textBoxPage = new TextBoxPage();
 
-    String userNameU;
-    String userEmailU;
+    String userNameRandom;
+    String userEmailRandom;
+    String currentAddressRandom;
+    String permanentAddressRandom;
 
     @BeforeEach
     void prepareRandomDate() {
-        userNameU = getRandomString(10);
-        userEmailU =  getRandomEmail();
+        userNameRandom = getRandomString(10);
+        userEmailRandom =  getRandomEmail();
+        currentAddressRandom = getRandomAddress();
+        permanentAddressRandom = getRandomAddress();
     }
 
     @Test
@@ -26,7 +29,7 @@ public class TextBoxTests extends TestBase{
         textBoxPage.openPage()
                 .typeUserName(userName)
                 .typeEmail(userEmail)
-                .typeCurrentAddress(currentAddress )
+                .typeCurrentAddress(currentAddress)
                 .typePermanentAddress(permanentAddress)
                 .submitForm()
                 .checkField("name",userName)
@@ -57,21 +60,17 @@ public class TextBoxTests extends TestBase{
 
     @Test
     void successfulFillFormTestWithUtils() {
-        String userName = getRandomString(10);
-        String userEmail = getRandomEmail();
-        String currentAddress = "first address 1";
-        String permanentAddress = "second address 2";
 
         textBoxPage.openPage()
-                .typeUserName(userName)
-                .typeEmail(userEmail)
-                .typeCurrentAddress(currentAddress )
-                .typePermanentAddress(permanentAddress)
+                .typeUserName(userNameRandom)
+                .typeEmail(userEmailRandom)
+                .typeCurrentAddress(currentAddressRandom)
+                .typePermanentAddress(permanentAddressRandom)
                 .submitForm()
-                .checkField("name",userName)
-                .checkField("email",userEmail)
-                .checkField("currentAddress",currentAddress)
-                .checkField("permanentAddress",permanentAddress);
+                .checkField("name",userNameRandom)
+                .checkField("email",userEmailRandom)
+                .checkField("currentAddress",currentAddressRandom)
+                .checkField("permanentAddress",permanentAddressRandom);
     }
 
     @Test
@@ -82,6 +81,16 @@ public class TextBoxTests extends TestBase{
                 .submitForm()
                 .checkField("name",userName)
                 .checkField("email",userEmail);
+    }
+
+    @Test
+    void successfulFillFormWithoutAddressTestWithUtils() {
+        textBoxPage.openPage()
+                .typeUserName(userNameRandom)
+                .typeEmail(userEmailRandom)
+                .submitForm()
+                .checkField("name",userNameRandom)
+                .checkField("email",userEmailRandom);
     }
 
     @Test
