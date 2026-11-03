@@ -1,5 +1,6 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,25 +17,30 @@ public class SimpleFormTest extends TestBaseSimpleForm {
 
     @BeforeEach
     void prepareRandomDate() {
-        userNameRandom = getRandomString(10);
-        userEmailRandom = getRandomEmail();
         wrongValueRandom = getRandomString(10);
     }
 
     @Test
     public void successfulSimpleFormTest() {
+        Faker faker = new Faker();
+        String userName = faker.name().fullName();
+        String userEmail = faker.internet().emailAddress();
+
         simpleFormPage.openPage()
-                .typeUserName(userNameRandom)
-                .typeEmail(userEmailRandom)
+                .typeUserName(userName)
+                .typeEmail(userEmail)
                 .submitForm()
-                .checkField("name",userNameRandom)
-                .checkField("email",userEmailRandom);
+                .checkField("name",userName)
+                .checkField("email",userEmail);
     }
 
     @Test
     public void negativeSimpleFormTest() {
+        Faker faker = new Faker();
+        String userName = faker.name().fullName();
+
         simpleFormPage.openPage()
-                .typeUserName(userNameRandom)
+                .typeUserName(userName)
                 .typeEmail(wrongValueRandom)
                 .submitForm()
                 .checkFieldsAreAbsent("name")

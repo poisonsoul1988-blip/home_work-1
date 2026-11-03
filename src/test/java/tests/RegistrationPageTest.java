@@ -1,5 +1,6 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -14,11 +15,7 @@ import static utils.RandomUtils.getRandomAddress;
 @Nested
 class RegistrationPageTest extends TestBase{
 
-    String firstNameRandom;
-    String lastNameRandom;
-    String userEmailRandom;
     String genderRandom;
-    String userNumberRandom;
     String dayRandom;
     String monthRandom;
     String yearRandom;
@@ -31,12 +28,11 @@ class RegistrationPageTest extends TestBase{
     LocalDate randomDate = getRandomDate();
 
     @BeforeEach
+
+
     void prepareRandomDate() {
-        firstNameRandom = getRandomString(10);
-        lastNameRandom = getRandomString(10);
-        userEmailRandom =  getRandomEmail();
+
         genderRandom = getRandomGender();
-        userNumberRandom = getRandomPhone();
         dayRandom = getRandomDay(randomDate);
         monthRandom = getRandomMonth(randomDate);
         yearRandom = getRandomYear(randomDate);
@@ -50,55 +46,66 @@ class RegistrationPageTest extends TestBase{
 
     @Test
     void successfulFill() {
+        Faker faker = new Faker();
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String userEmail = faker.internet().emailAddress();
+        String userNumber = faker.phoneNumber().subscriberNumber(10);
+        String currentAddress = faker.address().fullAddress();
 
         registrationPage
                 .openPage()
-                .typeFirstName(firstNameRandom)
-                .typeLastName(lastNameRandom)
-                .typeEmail(userEmailRandom)
+                .typeFirstName(firstName)
+                .typeLastName(lastName)
+                .typeEmail(userEmail)
                 .setGender(genderRandom)
-                .typeNumber(userNumberRandom)
+                .typeNumber(userNumber)
                 .setDateOfBirth(dayRandom,monthRandom,yearRandom)
                 .typeSubject(subjectRandom)
                 .setHobby(hobbyRandom)
                 .setPicture(fileName)
-                .typeCurrentAddress(currentAddressRandom)
+                .typeCurrentAddress(currentAddress)
                 .setStateAndCity(stateRandom,cityRandom)
                 .submitForm()
                 .checkSuccessModal()
-                .checkTableRow("Student Name",firstNameRandom + " " + lastNameRandom)
-                .checkTableRow("Student Email",userEmailRandom)
+                .checkTableRow("Student Name",firstName + " " + lastName)
+                .checkTableRow("Student Email",userEmail)
                 .checkTableRow("Gender",genderRandom)
-                .checkTableRow("Mobile",userNumberRandom)
+                .checkTableRow("Mobile",userNumber)
                 .checkTableRow("Date of Birth",dayRandom + " " + monthRandom + "," + yearRandom)
                 .checkTableRow("Subjects",subjectRandom)
                 .checkTableRow("Hobbies",hobbyRandom)
                 .checkTableRow("Picture","my-image.png")
-                .checkTableRow("Address",currentAddressRandom)
+                .checkTableRow("Address",currentAddress)
                 .checkTableRow("State and City", stateRandom + " " + cityRandom)
                 .checkCloseButton();
     }
 
     @Test
     void requiredFieldsFill() {
+        Faker faker = new Faker();
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String userEmail = faker.internet().emailAddress();
+        String userNumber = faker.phoneNumber().subscriberNumber(10);
 
         registrationPage
                 .openPage()
-                .typeFirstName(firstNameRandom)
-                .typeLastName(lastNameRandom)
-                .typeEmail(userEmailRandom)
+                .typeFirstName(firstName)
+                .typeLastName(lastName)
+                .typeEmail(userEmail)
                 .setGender(genderRandom)
-                .typeNumber(userNumberRandom)
+                .typeNumber(userNumber)
                 .setDateOfBirth(dayRandom,monthRandom,yearRandom)
                 .setPicture(fileName)
                 .typeCurrentAddress(currentAddressRandom)
                 .submitForm()
                 .checkSuccessModal()
                 .checkSuccessHeader(successModalHeader)
-                .checkTableRow("Student Name",firstNameRandom + " " + lastNameRandom)
-                .checkTableRow("Student Email",userEmailRandom)
+                .checkTableRow("Student Name",firstName + " " + lastName)
+                .checkTableRow("Student Email",userEmail)
                 .checkTableRow("Gender",genderRandom)
-                .checkTableRow("Mobile",userNumberRandom)
+                .checkTableRow("Mobile",userNumber)
                 .checkTableRow("Date of Birth",dayRandom + " " + monthRandom + "," + yearRandom)
                 .checkEmptyTableRow("Subjects")
                 .checkEmptyTableRow("Hobbies")
@@ -110,12 +117,16 @@ class RegistrationPageTest extends TestBase{
 
     @Test
     void nonNumericPhoneNumber() {
+        Faker faker = new Faker();
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String userEmail = faker.internet().emailAddress();
 
         registrationPage
                 .openPage()
-                .typeFirstName(firstNameRandom)
-                .typeLastName(lastNameRandom)
-                .typeEmail(userEmailRandom)
+                .typeFirstName(firstName)
+                .typeLastName(lastName)
+                .typeEmail(userEmail)
                 .setGender(genderRandom)
                 .typeNumber(wrongValueRandom)
                 .setDateOfBirth(dayRandom,monthRandom,yearRandom)
@@ -128,14 +139,18 @@ class RegistrationPageTest extends TestBase{
 
     @Test
     void wrongEmail() {
+        Faker faker = new Faker();
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String userNumber = faker.phoneNumber().subscriberNumber(10);
 
         registrationPage
                 .openPage()
-                .typeFirstName(firstNameRandom)
-                .typeLastName(lastNameRandom)
+                .typeFirstName(firstName)
+                .typeLastName(lastName)
                 .typeEmail(wrongValueRandom)
                 .setGender(genderRandom)
-                .typeNumber(userNumberRandom)
+                .typeNumber(userNumber)
                 .setDateOfBirth(dayRandom,monthRandom,yearRandom)
                 .setPicture(fileName)
                 .typeCurrentAddress(currentAddressRandom)
@@ -146,13 +161,18 @@ class RegistrationPageTest extends TestBase{
 
     @Test
     void emptyName() {
+        Faker faker = new Faker();
+        String lastName = faker.name().lastName();
+        String userEmail = faker.internet().emailAddress();
+        String userNumber = faker.phoneNumber().subscriberNumber(10);
+
 
         registrationPage
                 .openPage()
-                .typeLastName(lastNameRandom)
-                .typeEmail(userEmailRandom)
+                .typeLastName(lastName)
+                .typeEmail(userEmail)
                 .setGender(genderRandom)
-                .typeNumber(userNumberRandom)
+                .typeNumber(userNumber)
                 .setDateOfBirth(dayRandom,monthRandom,yearRandom)
                 .setPicture(fileName)
                 .typeCurrentAddress(currentAddressRandom)
@@ -163,13 +183,17 @@ class RegistrationPageTest extends TestBase{
 
     @Test
     void emptyLastName() {
+        Faker faker = new Faker();
+        String firstName = faker.name().firstName();
+        String userEmail = faker.internet().emailAddress();
+        String userNumber = faker.phoneNumber().subscriberNumber(10);
 
         registrationPage
                 .openPage()
-                .typeFirstName(firstNameRandom)
-                .typeEmail(userEmailRandom)
+                .typeFirstName(firstName)
+                .typeEmail(userEmail)
                 .setGender(genderRandom)
-                .typeNumber(userNumberRandom)
+                .typeNumber(userNumber)
                 .setDateOfBirth(dayRandom,monthRandom,yearRandom)
                 .setPicture(fileName)
                 .typeCurrentAddress(currentAddressRandom)
@@ -180,12 +204,16 @@ class RegistrationPageTest extends TestBase{
 
     @Test
     void emptyPhoneNumber() {
+        Faker faker = new Faker();
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String userEmail = faker.internet().emailAddress();
 
         registrationPage
                 .openPage()
-                .typeFirstName(firstNameRandom)
-                .typeLastName(lastNameRandom)
-                .typeEmail(userEmailRandom)
+                .typeFirstName(firstName)
+                .typeLastName(lastName)
+                .typeEmail(userEmail)
                 .setGender(genderRandom)
                 .setDateOfBirth(dayRandom,monthRandom,yearRandom)
                 .setPicture(fileName)
