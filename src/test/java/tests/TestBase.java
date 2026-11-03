@@ -12,7 +12,7 @@ public class TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
 
     @BeforeAll
-    static void beforeAll() {
+    static void setupEnvironment() {
         Configuration.browserSize = "1920x1080";
         Configuration.browser ="chrome";
         Configuration.baseUrl = "https://demoqa.com";
@@ -20,7 +20,7 @@ public class TestBase {
     }
 
     @AfterEach
-    void afterEach() {
+    void tearDown() {
         closeWebDriver();
     }
 }

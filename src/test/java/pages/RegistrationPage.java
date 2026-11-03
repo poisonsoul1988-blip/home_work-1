@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
+import pages.components.TableComponent;
 
 import java.util.Map;
 
@@ -31,8 +32,9 @@ public class RegistrationPage {
     private SelenideElement submitButton = $("#submit");
     private SelenideElement successModal = $(".modal-content");
     private SelenideElement successModalHeader = $(".modal-header");
-    private SelenideElement tableResults= $(".table-responsive");
     private SelenideElement closeSuccessModalButton = $("#closeLargeModal");
+
+    private final TableComponent resultsTable = new TableComponent($(".table-responsive"));
 
     //Actions
     public RegistrationPage openPage() {
@@ -127,20 +129,18 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage checkTableRow(String key, String value){
-        tableResults.$(byText(key)).parent().shouldHave(text(value));
-        return this;
-   }
-
-    public RegistrationPage checkFullTable(Map<String, String> expected) {
-        expected.forEach((label, value) ->
-                tableResults.$(byText(label)).parent().$$("td").get(1)
-                        .shouldHave(exactText(value)));
+    public RegistrationPage checkTableRow(String key, String value) {
+        resultsTable.checkRow(key, value);
         return this;
     }
 
-    public RegistrationPage checkEmptyTableRow(String key){
-        tableResults.$(byText(key)).sibling(0).shouldBe(empty);
+    public RegistrationPage checkFullTable(Map<String, String> expected) {
+        resultsTable.checkFullTable(expected);
+        return this;
+    }
+
+    public RegistrationPage checkEmptyTableRow(String key) {
+        resultsTable.checkEmptyRow(key);
         return this;
     }
 

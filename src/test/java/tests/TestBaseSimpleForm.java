@@ -7,7 +7,7 @@ import pages.SimpleFormPage;
 public class TestBaseSimpleForm {
 
     @BeforeAll
-    static void beforeAll() {
+    static void setupEnvironment() {
         Configuration.browserSize = "1920x1080";
         Configuration.browser ="chrome";
         Configuration.baseUrl = "https://qa-guru.github.io/one-page-form";
