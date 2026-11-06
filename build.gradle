@@ -19,3 +19,12 @@ tasks.withType(JavaCompile) {
 test {
     useJUnitPlatform()
 }
+
+test {
+    testLogging {
+        events "failed"
+        exceptionFormat "full"
+        showCauses true
+        showStackTraces true
+    }
+}
