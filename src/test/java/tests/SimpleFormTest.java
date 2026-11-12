@@ -1,47 +1,39 @@
 package tests;
 
-import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import testdata.Class2;
 
-import static testdata.SimpleFormTestData.*;
-import static utils.RandomUtils.getRandomEmail;
-import static utils.RandomUtils.getRandomString;
+
 
 
 public class SimpleFormTest extends TestBaseSimpleForm {
 
-    String userNameRandom;
-    String userEmailRandom;
-    String wrongValueRandom;
+    Class2 data;
 
     @BeforeEach
-    void prepareRandomDate() {
-        wrongValueRandom = getRandomString(10);
+    void setUp() {
+        // Генерируем свежий набор данных перед каждым тестом
+        data = new Class2();
     }
 
     @Test
     public void successfulSimpleFormTest() {
-        Faker faker = new Faker();
-        String userName = faker.name().fullName();
-        String userEmail = faker.internet().emailAddress();
 
         simpleFormPage.openPage()
-                .typeUserName(userName)
-                .typeEmail(userEmail)
+                .typeUserName(data.firstName)
+                .typeEmail(data.userEmail)
                 .submitForm()
-                .checkField("name",userName)
-                .checkField("email",userEmail);
+                .checkField("name",data.firstName)
+                .checkField("email",data.userEmail);
     }
 
     @Test
     public void negativeSimpleFormTest() {
-        Faker faker = new Faker();
-        String userName = faker.name().fullName();
 
         simpleFormPage.openPage()
-                .typeUserName(userName)
-                .typeEmail(wrongValueRandom)
+                .typeUserName(data.firstName)
+                .typeEmail(data.wrongValueRandom)
                 .submitForm()
                 .checkFieldsAreAbsent("name")
                 .checkFieldsAreAbsent("email");
