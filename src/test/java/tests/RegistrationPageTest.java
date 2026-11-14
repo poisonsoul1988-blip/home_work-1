@@ -19,12 +19,14 @@ class RegistrationPageTest {
     static void setupEnvironment() {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
+
+        Configuration.remote = "https://user1:1234@selenoid.qa.guru/wd/hub";
     }
 
-    @AfterEach
-    void tearDown() {
-        closeWebDriver();
-    }
+//    @AfterEach
+//    void tearDown() {
+//        closeWebDriver();
+//    }
 
     @Test
     void successfulFill() {
