@@ -1,14 +1,30 @@
 package tests;
 
+import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import pages.RegistrationPage;
 
-import java.util.Map;
-
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static testdata.RegistrationPageTestData.*;
 
 @Nested
-class RegistrationPageTest extends TestBase{
+class RegistrationPageTest {
+
+    RegistrationPage registrationPage = new RegistrationPage();
+
+    @BeforeAll
+    static void setupEnvironment() {
+        Configuration.browserSize = "1920x1080";
+        Configuration.baseUrl = "https://demoqa.com";
+    }
+
+    @AfterEach
+    void tearDown() {
+        closeWebDriver();
+    }
 
     @Test
     void successfulFill() {
