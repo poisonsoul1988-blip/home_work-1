@@ -9,9 +9,9 @@ public class TestBaseSimpleForm {
     @BeforeAll
     static void setupEnvironment() {
         Configuration.browserSize = "1920x1080";
-        Configuration.browser ="chrome";
-        Configuration.baseUrl = "https://qa-guru.github.io/one-page-form";
-        Configuration.timeout = 10000;
+        Configuration.baseUrl = "https://demoqa.com";
+
+        Configuration.remote = "https://user1:1234@selenoid.qa.guru/wd/hub";
     }
 
     SimpleFormPage simpleFormPage = new SimpleFormPage();
