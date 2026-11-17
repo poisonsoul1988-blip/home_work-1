@@ -1,7 +1,6 @@
 package tests;
 
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static io.qameta.allure.Allure.step;
 import static testdata.RegistrationPageTestData.*;
@@ -10,6 +9,7 @@ import static testdata.RegistrationPageTestData.*;
 class RegistrationPageTest extends TestBase {
 
     @Test
+    @DisplayName("Successful registration")
     void successfulFill() {
 
         step("Open registration form", () -> {
@@ -43,6 +43,7 @@ class RegistrationPageTest extends TestBase {
     }
 
     @Test
+    @DisplayName("Only required fields registration")
     void requiredFieldsFill() {
 
         step("Open registration form", () -> {
@@ -83,6 +84,7 @@ class RegistrationPageTest extends TestBase {
     }
 
     @Test
+    @DisplayName("Registration with invalid phone number")
     void nonNumericPhoneNumber() {
 
         step("Open registration form", () -> {
@@ -112,6 +114,7 @@ class RegistrationPageTest extends TestBase {
     }
 
     @Test
+    @DisplayName("Registration with invalid email")
     void wrongEmail() {
 
         step("Open registration form", () -> {
@@ -141,6 +144,7 @@ class RegistrationPageTest extends TestBase {
     }
 
     @Test
+    @DisplayName("Registration with invalid empty first name")
     void emptyName() {
 
         step("Open registration form", () -> {
@@ -169,6 +173,7 @@ class RegistrationPageTest extends TestBase {
     }
 
     @Test
+    @DisplayName("Registration with invalid empty last name")
     void emptyLastName() {
 
         step("Open registration form", () -> {
@@ -197,6 +202,7 @@ class RegistrationPageTest extends TestBase {
     }
 
     @Test
+    @DisplayName("Registration with invalid empty phone number")
     void emptyPhoneNumber() {
 
         step("Open registration form", () -> {
