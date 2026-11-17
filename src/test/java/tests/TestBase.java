@@ -58,6 +58,7 @@ public class TestBase {
             // Сначала делаем скриншоты и собираем аттачменты, пока браузер открыт
             Attach.screenshotAs("Last screenshot");
             Attach.pageSource();
+            Attach.browserConsoleLogs();
             Attach.addVideo();
         } finally {
             // Браузер закрываем в самом конце и гарантированно (даже если упали аттачменты)
