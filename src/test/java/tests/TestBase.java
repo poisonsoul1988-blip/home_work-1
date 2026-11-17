@@ -53,18 +53,14 @@ public class TestBase {
 //    }
 
     @AfterEach
-    void tearDown() {
-        try {
-            // Сначала делаем скриншоты и собираем аттачменты, пока браузер открыт
+    void addAttachments() {
             Attach.screenshotAs("Last screenshot");
             Attach.pageSource();
             Attach.browserConsoleLogs();
             Attach.addVideo();
-        } finally {
-            // Браузер закрываем в самом конце и гарантированно (даже если упали аттачменты)
             closeWebDriver();
         }
-    }
+
 }
 
 
