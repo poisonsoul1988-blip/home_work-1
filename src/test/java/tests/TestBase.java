@@ -21,11 +21,18 @@ public class TestBase {
 
     @BeforeAll
     static void setupEnvironment() {
-        Configuration.browserSize = "1920x1080";
-        Configuration.baseUrl = "https://demoqa.com";
-//        Configuration.browser = "chrome";
-//        Configuration.browserVersion = "151.0";
-//        Configuration.timeout = 15000;
+        String baseUrl = System.getProperty("baseUrl", "https://demoqa.com");
+        String browser = System.getProperty("browser", "chrome");
+        String remoteHost = System.getProperty("remoteUrl", "selenoid.qa.guru/wd/hub");
+        String remoteUser = System.getProperty("remoteUser", "user1");
+        String remotePass = System.getProperty("remotePassword", "1234");
+        String browserSize = System.getProperty("browserSize", "1920x1080");
+        boolean headless = Boolean.parseBoolean(System.getProperty("headless"));
+
+        Configuration.browserSize = browserSize;
+        Configuration.baseUrl = baseUrl;
+        Configuration.browser = browser;
+        Configuration.headless = headless;
 
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--disable-dev-shm-usage", "--no-sandbox");
@@ -36,7 +43,7 @@ public class TestBase {
         ));
         Configuration.browserCapabilities = chromeOptions;
 
-        Configuration.remote = "https://user1:1234@selenoid.qa.guru/wd/hub";
+        Configuration.remote = "https://" + remoteUser + ":" + remotePass + "@" + remoteHost;
     }
 
     @BeforeEach
