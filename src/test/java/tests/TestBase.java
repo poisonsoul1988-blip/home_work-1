@@ -27,12 +27,15 @@ public class TestBase {
         String remoteUser = System.getProperty("remoteUser", "user1");
         String remotePass = System.getProperty("remotePassword", "1234");
         String browserSize = System.getProperty("browserSize", "1920x1080");
+        String browserVersion = System.getProperty("browserVersion", "157");
         boolean headless = Boolean.parseBoolean(System.getProperty("headless"));
 
         Configuration.browserSize = browserSize;
         Configuration.baseUrl = baseUrl;
         Configuration.browser = browser;
+        Configuration.browserVersion = browserVersion;
         Configuration.headless = headless;
+
 
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--disable-dev-shm-usage", "--no-sandbox");
