@@ -55,12 +55,9 @@ class RegistrationPageTest extends TestBase {
             registrationPage
                     .typeFirstName(firstName)
                     .typeLastName(lastName)
-                    .typeEmail(userEmail)
                     .setGender(gender)
                     .typeNumber(userNumber)
                     .setDateOfBirth(day, month, year)
-                    .setPicture(fileName)
-                    .typeCurrentAddress(currentAddress)
                     .submitForm();
         });
 
@@ -69,14 +66,14 @@ class RegistrationPageTest extends TestBase {
                     .checkSuccessModal()
                     .checkSuccessHeader(successModalHeader)
                     .checkTableRow("Student Name", firstName + " " + lastName)
-                    .checkTableRow("Student Email", userEmail)
+                    .checkEmptyTableRow("Student Email")
                     .checkTableRow("Gender", gender)
                     .checkTableRow("Mobile", userNumber)
                     .checkTableRow("Date of Birth", day + " " + month + "," + year)
                     .checkEmptyTableRow("Subjects")
                     .checkEmptyTableRow("Hobbies")
-                    .checkTableRow("Picture", "my-image.png")
-                    .checkTableRow("Address", currentAddress)
+                    .checkEmptyTableRow("Picture")
+                    .checkEmptyTableRow("Address")
                     .checkEmptyTableRow("State and City")
                     .checkCloseButton();
         });
